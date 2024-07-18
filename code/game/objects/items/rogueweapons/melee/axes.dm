@@ -123,7 +123,7 @@
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
 	gripped_intents = list(/datum/intent/axe/cut/battle ,/datum/intent/axe/chop/battle)
-	minstr = 12
+	minstr = 10
 	wdefense = 4
 
 /obj/item/rogueweapon/stoneaxe/battle/getonmobprop(tag)
