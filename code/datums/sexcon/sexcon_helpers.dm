@@ -37,7 +37,7 @@
 /mob/living
 	var/can_do_sex = TRUE
 	var/virginity = FALSE
-	var/deviant = FALSE
+	var/defiant = TRUE
 
 /mob/living/carbon/human/MiddleMouseDrop_T(mob/living/target, mob/living/user)
 	if(user.mmb_intent)
@@ -48,6 +48,10 @@
 		return
 	if(!user.can_do_sex())
 		to_chat(user, "<span class='warning'>I can't do this.</span>")
+		return
+	if(!target.client || !target.client.prefs || (target.client.prefs.sexable == FALSE)) // Don't bang someone that dosn't want it.
+		to_chat(user, "<span class='warning'>[target] dosn't wish to be touched. (Thier ERP prefrence under options)</span>")
+		to_chat(target, "<span class='warning'>[user] failed to touch you. (Your ERP prefrence under options)</span>")
 		return
 	user.sexcon.start(src)
 

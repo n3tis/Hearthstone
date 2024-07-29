@@ -1,6 +1,8 @@
 
 /mob/living/carbon/human
 	var/datum/charflaw/charflaw
+	///used for in-round gained roles for examine.
+	var/funnyrole
 
 /mob/proc/sate_addiction()
 	return
@@ -9,6 +11,7 @@
 	if(istype(charflaw, /datum/charflaw/addiction))
 		var/datum/charflaw/addiction/A = charflaw
 //		remove_stress(list(/datum/stressevent/vice1,/datum/stressevent/vice2,/datum/stressevent/vice3))
+		add_stress(/datum/stressevent/vicesatisfied)
 		A.sated = TRUE
 		A.time = initial(A.time) //reset roundstart sate offset to standard
 		A.next_sate = world.time + A.time

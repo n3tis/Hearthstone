@@ -204,9 +204,14 @@
 			
 			if(weapon_parry == TRUE)
 				if(do_parry(used_weapon, drained, user)) //show message
-					
+					// defender skill gain
 					if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
-						mind.adjust_experience(used_weapon.associated_skill, max(round(STAINT/2), 0), FALSE)
+						// No duping exp gains by attacking with a shield on active hand
+						if(used_weapon == offhand && istype(used_weapon, /obj/item/rogueweapon/shield))
+							// Most shield users aren't bright, let's not make it near impossible to learn
+							H.mind?.adjust_experience(/datum/skill/combat/shields, max(round(STAINT - 3), 0), FALSE)
+						else
+							H.mind?.adjust_experience(used_weapon.associated_skill, max(round(STAINT), 0), FALSE)
 
 					var/obj/item/AB = intenty.masteritem
 					
@@ -215,9 +220,9 @@
 					if(U.mind)
 						if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
 							if(AB)
-								U.mind.adjust_experience(AB.associated_skill, max(round(U.STAINT/2), 0), FALSE)
+								U.mind.adjust_experience(AB.associated_skill, max(round(U.STAINT), 0), FALSE)
 							else
-								U.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
+								U.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT), 0), FALSE)
 
 					if(prob(66) && AB)
 						if((used_weapon.flags_1 & CONDUCT_1) && (AB.flags_1 & CONDUCT_1))
@@ -242,7 +247,7 @@
 			if(weapon_parry == FALSE)
 				if(do_unarmed_parry(drained, user))
 					if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
-						H.mind?.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
+						H.mind?.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT), 0), FALSE)
 					flash_fullscreen("blackflash2")
 					return TRUE
 				else

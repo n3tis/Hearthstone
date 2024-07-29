@@ -51,7 +51,7 @@
 /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	icon_state = "ichainmail"
 	name = "chainmaille"
-	desc = "A chain vest made of heavy iron rings. Better than nothing."
+	desc = "A chain vest made of heavy iron rings."
 	body_parts_covered = CHEST|GROIN|VITALS
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
@@ -69,22 +69,57 @@
 	smeltresult = /obj/item/ingot/steel
 	do_sound = TRUE
 	armor_class = ARMOR_CLASS_MEDIUM
+	max_integrity = 300
 
-/obj/item/clothing/suit/roguetown/armor/chainmail/chainkini
+/obj/item/clothing/suit/roguetown/armor/chainmail/bikini
 	name = "chainmail bikini"
-	desc = "This does not have the magical full torso coverage as promised..."
+	desc = "Not very comfortable against the skin."
 	icon_state = "chainkini"
 	item_state = "chainkini"
 	allowed_sex = list(FEMALE)
 	allowed_race = CLOTHED_RACES_TYPES
-	body_parts_covered = CHEST|GROIN
-	anvilrepair = /datum/skill/craft/armorsmithing
-	armor_class = ARMOR_CLASS_LIGHT
+
+/obj/item/clothing/suit/roguetown/armor/carapace
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "carapace armor"
+	desc = "Full carapace plate. Leg protecting tassets, groin cup, armored vambraces."
+	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
+	icon_state = "carapace"
+	item_state = "carapace"
+	blocksound = PLATEHIT
+	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	armor = list("blunt" = 60, "slash" = 100, "stab" = 0, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	max_integrity = 175
+	allowed_sex = list(MALE, FEMALE)
+	var/do_sound = TRUE
+	sewrepair = TRUE
+	smeltresult = /obj/item/ash
+	equip_delay_self = 60
+	nodismemsleeves = TRUE
+	armor_class = ARMOR_CLASS_MEDIUM
+
+/obj/item/clothing/suit/roguetown/armor/carapace/Initialize()
+	. = ..()
+	if(do_sound)
+		AddComponent(/datum/component/squeak, list('sound/foley/footsteps/armor/chain (1).ogg',\
+													'sound/foley/footsteps/armor/chain (2).ogg',\
+													'sound/foley/footsteps/armor/chain (3).ogg'), 70)
+
+/obj/item/clothing/suit/roguetown/armor/carapace/cuirass
+	name = "carapace cuirass"
+	desc = "vest styled watery shell chest armor sown in layers."
+	body_parts_covered = CHEST|GROIN|VITALS
+	icon_state = "carapacecuirass"
+	item_state = "carapacecuirass"
+	max_integrity = 150
+	equip_delay_self = 30
+
 
 /obj/item/clothing/suit/roguetown/armor/plate
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "steel half-plate"
-	desc = "\'Adventurer-fit\' plate armor with polldrons."
+	desc = "\'Adventurer-fit\' plate armor with pauldrons."
 	body_parts_covered = CHEST|GROIN|VITALS
 	icon_state = "halfplate"
 	item_state = "halfplate"
@@ -123,6 +158,15 @@
 	smeltresult = /obj/item/ingot/steel
 	armor_class = ARMOR_CLASS_MEDIUM
 
+/obj/item/clothing/suit/roguetown/armor/plate/bikini
+	name = "plate bikini"
+	desc = "Half plate in bikini form, still just as protective somehow."
+	icon_state = "halfplatekini"
+	item_state = "halfplatekini"
+	allowed_sex = list(FEMALE)
+	anvilrepair = /datum/skill/craft/armorsmithing
+	armor_class = ARMOR_CLASS_MEDIUM
+
 /obj/item/clothing/suit/roguetown/armor/plate/full
 	name = "plate armor"
 	desc = "Full plate. Leg protecting tassets, groin cup, armored vambraces."
@@ -130,8 +174,17 @@
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
 	equip_delay_self = 80
 
+/obj/item/clothing/suit/roguetown/armor/plate/full/bikini
+	name = "fullplate bikini"
+	desc = "Full plate in bikini form, full package and full exposure."
+	icon_state = "platekini"
+	allowed_sex = list(FEMALE)
+	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
+	equip_delay_self = 80
+
 /obj/item/clothing/suit/roguetown/armor/plate/half/iron
 	name = "iron breastplate"
+	desc = "Solid iron to protect the torso."
 	icon_state = "ibreastplate"
 	max_integrity = 200
 	smeltresult = /obj/item/ingot/iron
@@ -272,7 +325,7 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "gambeson"
-	desc = "A large shirt meant to be used below armor."
+	desc = "A large shirt meant to be worn below armor."
 	icon_state = "gambeson"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	armor = list("blunt" = 60, "slash" = 40, "stab" = 50, "bullet" = 25, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -291,6 +344,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/gambeson/lord
 	name = "arming jacket"
+	desc = "Similar to a gambeson, it is meant to be used under armor."
 	icon_state = "dgamb"
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = NON_DWARVEN_RACE_TYPES
@@ -333,6 +387,30 @@
 	max_integrity = 300
 	sellprice = 25
 	armor_class = ARMOR_CLASS_LIGHT
+
+/obj/item/clothing/suit/roguetown/armor/leather/bikini
+	name = "leather bikini"
+	desc = "Flexible cowhide armor. Lightweight, better than nothing. Now in tasteful bikini shape."
+	icon_state = "leatherkini"
+	item_state = "leatherkini"
+	allowed_sex = list(FEMALE)
+	allowed_race = CLOTHED_RACES_TYPES
+
+/obj/item/clothing/suit/roguetown/armor/leather/studded/bikini
+	name = "studded leather bikini"
+	desc = "Studded leather is the most durable of all hides and leathers and about as light. This one is in bikini form."
+	icon_state = "studleatherkini"
+	item_state = "studleatherkini"
+	allowed_sex = list(FEMALE)
+	allowed_race = CLOTHED_RACES_TYPES
+
+/obj/item/clothing/suit/roguetown/armor/leather/hide/bikini
+	name = "hide bikini"
+	desc = "A light armor of wildbeast hide. Far more durable than leather. This will not keep a person warm though..."
+	icon_state = "hidearmorkini"
+	item_state = "hidearmorkini"
+	allowed_sex = list(FEMALE)
+	allowed_race = CLOTHED_RACES_TYPES
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"

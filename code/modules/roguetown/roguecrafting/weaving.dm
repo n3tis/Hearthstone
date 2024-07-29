@@ -120,50 +120,19 @@
 	craftdiff = 5
 	sellprice = 60
 
-/datum/crafting_recipe/roguetown/weaving/robe/mageblue
-	name = "robe (blue)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/mageblue)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/silk = 2)
-	craftdiff = 4
-	sellprice = 30
+//Eora content from Stonekeep
+/datum/crafting_recipe/roguetown/weaving/eoramask
+	name = "eora mask"
+	result = list(/obj/item/clothing/head/roguetown/eoramask)
+	reqs = list(/obj/item/ingot/silver,
+				/obj/item/natural/silk = 4)
+	craftdiff = 3
+	sellprice = 20
 
-/datum/crafting_recipe/roguetown/weaving/robe/magegreen
-	name = "robe (green)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/magegreen)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/silk = 2)
-	craftdiff = 4
-	sellprice = 30
-
-/datum/crafting_recipe/roguetown/weaving/robe/mageorange
-	name = "robe (orange)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/mageorange)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/silk = 2)
-	craftdiff = 4
-	sellprice = 30
-
-/datum/crafting_recipe/roguetown/weaving/robe/magered
-	name = "robe (red)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/magered)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/silk = 2)
-	craftdiff = 4
-	sellprice = 30
-
-/datum/crafting_recipe/roguetown/weaving/robe/mageyellow
-	name = "robe (yellow)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/mageyellow)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/silk = 2)
-	craftdiff = 4
-	sellprice = 30
-
-/datum/crafting_recipe/roguetown/weaving/robe/magewhite
-	name = "robe (white)"
-	result = list (/obj/item/clothing/suit/roguetown/shirt/robe/black)
+/datum/crafting_recipe/roguetown/weaving/eorarobes
+	name = "eora robes"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/eora)
 	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/silk = 3)
-	craftdiff = 5
-	sellprice = 40
+				/obj/item/natural/silk = 1)
+	craftdiff = 3
+	sellprice = 20

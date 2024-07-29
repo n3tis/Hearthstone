@@ -108,7 +108,7 @@
 
 /obj/item/clothing/suit/roguetown/shirt/shortshirt
 	name = "shirt"
-	desc = ""
+	desc = "A simple shirt."
 	icon_state = "shortshirt"
 	item_state = "shortshirt"
 	r_sleeve_status = SLEEVE_NORMAL
@@ -133,7 +133,7 @@
 /obj/item/clothing/suit/roguetown/shirt/rags
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "rags"
-	desc = ""
+	desc = "Better than going naked? You be the judge."
 	body_parts_covered = CHEST|GROIN|VITALS
 	color = "#b0b0b0"
 	icon_state = "rags"
@@ -158,7 +158,7 @@
 /obj/item/clothing/suit/roguetown/shirt/tribalrag
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "tribalrag"
-	desc = ""
+	desc = "Rags worn by southern tribals."
 	body_parts_covered = CHEST|VITALS
 	boobed = TRUE
 	icon_state = "tribalrag"
@@ -306,37 +306,36 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	var/picked = FALSE
-	colorgrenz = TRUE
 
-/obj/item/clothing/suit/roguetown/shirt/grenzelhoft/attack_right()
+/obj/item/clothing/suit/roguetown/shirt/grenzelhoft/attack_right(mob/user)
 	..()
 	if(!picked)
 		var/list/colors = list(
-		"PURPLE"="#865c9c",
-		"RED"="#933030",
-		"BROWN"="#685542",
-		"GREEN"="#79763f",
-		"BLUE"="#395480",
-		"YELLOW"="#b5b004",
-		"TEAL"="#249589",
-		"WHITE"="#ffffff",
-		"ORANGE"="#b86f0c",
-		"MAJENTA"="#962e5c")
+		"Swan White"="#ffffff",
+		"Lavender"="#865c9c",
+		"Royal Purple"="#5E4687",
+		"Wine Rouge"="#752B55",
+		"Sow's skin"="#CE929F",
+		"Knight's Red"="#933030",
+		"Madroot Red"="#AD4545",
+		"Marigold Orange"="#E2A844",
+		"Politely, Yuck"="#685542",
+		"Astrata's Yellow"="#FFFD8D",
+		"Bog Green"="#375B48",
+		"Seafoam Green"="#49938B",
+		"Woad Blue"="#395480",
+		"Cornflower Blue"="#749EE8",
+		"Blacksteel Grey"="#404040",)
 
-		var/mob/living/carbon/human/L = loc
-		var/choice = input(L, "Choose a color.", "GRENZELHOFTIAN COLORPLEX") as anything in colors
+		var/choice = input(user, "Choose a color.", "Grenzelhoft colors") as anything in colors
 		var/playerchoice = colors[choice]
 		picked = TRUE
 		detail_color = playerchoice
+		detail_tag = "_detail"
 		update_icon()
-		for(var/obj/item/clothing/V in L.get_equipped_items(FALSE))
-			testing("clothes to color are [V]")
-			if(V.colorgrenz)
-				V.detail_color = playerchoice
-				V.update_icon()
-		L.regenerate_icons()
-
-
+		if(loc == user && ishuman(user))
+			var/mob/living/carbon/H = user
+			H.update_inv_shirt()
 
 /obj/item/clothing/suit/roguetown/shirt/grenzelhoft/update_icon()
 	cut_overlays()
